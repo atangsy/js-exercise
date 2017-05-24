@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>quene</title>
+    <style>
+        li{
+            display:inline-block;
+            background-color: #cd4a48;
+            color: #f3f6f7;
+        }
+
+    </style>
+</head>
+<body>
+<form>
+    <input id="in-text" type="text">
+    <button id="left-in">left in</button>
+    <input id="right-in" type="button" value="right in">
+    <input id="left-out" type="button" value="left out">
+    <input id="right-out" type="button" value="right out">
+</form>
+<div>
+    <ul id="list">
+
+
+    </ul>
+</div>
+<script type="text/javascript">
+    var leftin_btn=document.querySelector("#left-in");
+    var rightin_btn=document.querySelector("#right-in");
+    var leftout_btn=document.querySelector("#left-out");
+    var rightout_btn=document.querySelector("#right-out");
+    var uli=document.querySelector("#list");
+    function numin(direction){
+        var intext=document.querySelector("#in-text");
+        var num=intext.value;
+        if(num==""){
+            alert("Please input a number");
+            intext.focus();
+        }else if(isNaN(num)){
+            alert("Please input a number");
+            intext.value="";
+            intext.focus();
+        }else{
+            var ali=document.createElement("li");
+            ali.innerHTML=num;
+            if(direction=="left"){
+                uli.insertBefore(ali,uli.firstChild);
+            }else if(direction=="right"){
+                uli.appendChild(ali);
+            }
+        }
+    }
+    function numout(direction) {
+        var intext=document.querySelector("#in-text");
+        var num=intext.value;
+        if(uli.childElementCount<=0){
+            alert("can't");
+            return false;
+        }else {
+            if (direction === "left") {
+                alert("delete"+uli.firstChild.innerText+"!");
+                uli.removeChild(uli.firstChild);
+            }else if(direction==="right"){
+                alert("delete"+uli.lastChild.innerText+"!");
+                uli.removeChild(uli.lastChild);
+            }
+        }
+
+    }
+    /*leftin_btn.onclick=function(){numin("right");};
+    rightin_btn.onclick=function(){numin("left");};
+    leftout_btn.onclick=function(){numout("left");};
+    rightout_btn.onclick=function(){numout("right");};*/
+
+    leftin_btn.addEventListener("click",function(){numin("left");},false);
+    rightin_btn.addEventListener("click",function(){numin("right");},false);
+    leftout_btn.addEventListener("click",function(){numout("left");},false);
+    leftout_btn.addEventListener("click",function(){numout("left");},false);
+
+
+</script>
+</body>
+</html>
